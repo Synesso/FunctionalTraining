@@ -5,8 +5,8 @@ import arrow.core.Some
 import ft.typesafety.OptionalExercises1.getFromConfig
 import ft.typesafety.OptionalExercises1.lengthOfHost
 import ft.typesafety.OptionalExercises1.portPlus1000
-import io.kotlintest.shouldBe
-import io.kotlintest.specs.StringSpec
+import io.kotest.core.spec.style.StringSpec
+import io.kotest.matchers.shouldBe
 
 class OptionalExercises1Test : StringSpec({
 

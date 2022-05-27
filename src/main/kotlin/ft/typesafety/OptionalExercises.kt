@@ -1,6 +1,9 @@
 package ft.typesafety
 
+import arrow.core.None
 import arrow.core.Option
+import arrow.core.Option.Companion.fromNullable
+import arrow.core.Some
 
 /**
  * Use pattern matching and recursion.  No vars, no loops, no overriding.

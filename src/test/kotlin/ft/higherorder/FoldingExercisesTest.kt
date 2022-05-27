@@ -14,8 +14,8 @@ import ft.higherorder.FoldingExercises.sum
 import ft.recursion.Nil
 import ft.recursion.FunList
 import ft.recursion.Cons
-import io.kotlintest.specs.StringSpec
-import io.kotlintest.shouldBe
+import io.kotest.core.spec.style.StringSpec
+import io.kotest.matchers.shouldBe
 
 class FoldingExercisesTest : StringSpec({
 

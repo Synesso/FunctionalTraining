@@ -2,8 +2,8 @@ package ft.typesafety
 
 import ft.typesafety.OptionalExercises2.connectToSquareupHostsOnly
 import ft.typesafety.OptionalExercises2.getEnvForHost
-import io.kotlintest.shouldBe
-import io.kotlintest.specs.StringSpec
+import io.kotest.core.spec.style.StringSpec
+import io.kotest.matchers.shouldBe
 
 class OptionalExercises2Test : StringSpec({
 

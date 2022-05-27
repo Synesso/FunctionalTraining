@@ -1,11 +1,11 @@
-val arrowVersion by extra { "0.10.0" }
+val arrowVersion = "1.0.1"
+val kotestVersion = "5.3.0"
 
 plugins {
-    kotlin("jvm") version "1.3.30"
+    kotlin("jvm") version "1.6.21"
 }
 
 repositories {
-    jcenter()
     mavenCentral()
     maven(url = "https://dl.bintray.com/arrow-kt/arrow-kt/")
 }
@@ -13,15 +13,12 @@ repositories {
 dependencies {
     implementation(kotlin("stdlib"))
 
-    compile("io.arrow-kt:arrow-core:$arrowVersion")
-    compile("io.arrow-kt:arrow-syntax:$arrowVersion")
-    compile("io.arrow-kt:arrow-optics:$arrowVersion")
+    implementation(platform("io.arrow-kt:arrow-stack:$arrowVersion"))
+    implementation("io.arrow-kt:arrow-core")
+    implementation("io.kotest:kotest-runner-junit5-jvm:$kotestVersion")
 
-    testCompile("io.kotlintest:kotlintest-runner-junit5:3.3.2")
-    testCompile("junit:junit:4.12")
+    testImplementation(kotlin("test"))
 }
-tasks {
-    test {
-        useJUnitPlatform()
-    }
+tasks.withType<Test>().configureEach {
+    useJUnitPlatform()
 }

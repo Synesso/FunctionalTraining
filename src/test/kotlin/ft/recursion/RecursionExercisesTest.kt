@@ -11,8 +11,8 @@ import ft.recursion.RecursionExercises.flatten
 import ft.recursion.RecursionExercises.flatMap
 import ft.recursion.RecursionExercises.maximum
 import ft.recursion.RecursionExercises.reverse
-import io.kotlintest.specs.StringSpec
-import io.kotlintest.shouldBe
+import io.kotest.core.spec.style.StringSpec
+import io.kotest.matchers.shouldBe
 
 class RecursionExercisesTest : StringSpec({
   "10 + 34 = 44" {
