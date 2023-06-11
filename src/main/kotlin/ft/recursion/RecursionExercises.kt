@@ -1,5 +1,6 @@
 package ft.recursion
 
+import kotlin.math.min
 
 // Taken from http://tmorris.net/posts/scala-exercises-for-beginners/index.html
 
@@ -26,10 +27,10 @@ package ft.recursion
 sealed class FunList<out A> {
   companion object {
     operator fun <A> invoke(vararg l: A): FunList<A> = invoke(listOf(*l))
-    operator fun <A> invoke(l: List<A>): FunList<A> = l.foldRight(Nil, { e: A, acc: FunList<A> -> Cons<A>(e, acc) })
+    operator fun <A> invoke(l: List<A>): FunList<A> =
+      l.foldRight(Nil, { e: A, acc: FunList<A> -> Cons<A>(e, acc) })
   }
 }
-
 
 object Nil : FunList<Nothing>()
 data class Cons<out A>(val head: A, val tail: FunList<A>): FunList<A>()
@@ -41,13 +42,36 @@ object RecursionExercises {
   fun minusOne(n: Int) = n - 1
 
   // Add two non-negative Integers together.  You are only allowed to use plusOne and minusOne above
-  fun add(a: Int, b: Int): Int = TODO()
+  //a = 6, b = 2
+  //a = 7, b = 1
+  //a = 8, b = 0
+  tailrec fun add(a: Int, b: Int): Int =
+    if (b == 0) a
+    else add(plusOne(a), minusOne(b))
 
   // You are not permitted to use any list functions such as map, flatMap, ++, flatten etc
-  fun sum(x: FunList<Int>): Int = TODO()
+  // Empty FunList is a FunList = FunList()
+
+  //FunList = [1,2,3]
+    // add([3, 3])
+  //FunList = []
+
+
+  fun sum(x: FunList<Int>): Int =
+    when (x) {
+      Nil -> 0
+      is Cons -> add(x.head, sum(x.tail))
+    }
 
   //Again no list functions are permitted for the following
-  fun <A> length(x: FunList<A>): Int = TODO()
+  fun <A> length(x: FunList<A>): Int {
+    fun length2(x: FunList<A>, depth: Int) =
+      when (x) {
+        Nil -> depth
+        is Cons -> length2(x.tail, depth + 1)
+      }
+    return length2(x, 0)
+  }
 
   // Do you notice anything similar between sum and length? Hmm...
 
