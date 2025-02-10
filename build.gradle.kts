@@ -1,27 +1,39 @@
-val arrowVersion by extra { "1.1.2" }
+val arrowVersion by extra { "1.2.1" }
+val quiverVersion by extra { "0.5.13" }
 
 plugins {
-    kotlin("jvm") version "1.6.20"
+    kotlin("jvm") version "1.9.20"
 }
 
 repositories {
-    jcenter()
     mavenCentral()
+    maven {
+        url = uri("https://maven.pkg.github.com/cashapp/quiver")
+        credentials {
+            username = System.getenv("GITHUB_USERNAME")
+            password = System.getenv("GITHUB_TOKEN")
+        }
+    }
+}
+
+kotlin {
+    jvmToolchain(21)
 }
 
 dependencies {
     implementation(kotlin("stdlib"))
-
     implementation("io.arrow-kt:arrow-core:$arrowVersion")
-
-    testImplementation("io.kotest:kotest-assertions-core:5.4.2")
-    testImplementation("io.kotest.extensions:kotest-assertions-arrow:1.2.5")
-    testImplementation("io.kotest:kotest-runner-junit5-jvm:5.4.2")
-    testImplementation("io.kotest:kotest-property:5.4.2")
-    testImplementation("io.kotest.extensions:kotest-property-arrow:1.2.5")
-    testImplementation("io.kotest:kotest-runner-junit5-jvm:5.4.2")
-
+    implementation("io.arrow-kt:arrow-fx-coroutines:$arrowVersion")
+    implementation("io.arrow-kt:arrow-optics:$arrowVersion")
+    implementation("app.cash.quiver:lib:$quiverVersion")
+    
+    testImplementation("io.kotest:kotest-assertions-core:5.8.0")
+    testImplementation("io.kotest.extensions:kotest-assertions-arrow:1.4.0")
+    testImplementation("io.kotest:kotest-runner-junit5-jvm:5.8.0")
+    testImplementation("io.kotest:kotest-property:5.8.0")
+    testImplementation("io.kotest.extensions:kotest-property-arrow:1.4.0")
 }
+
 tasks {
     test {
         useJUnitPlatform()
